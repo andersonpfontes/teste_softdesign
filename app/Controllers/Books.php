@@ -6,7 +6,6 @@ use App\Models\BookModel;
 
 class Books extends BaseController
 {
-
   protected $bookModel;
 
   public function __construct()
@@ -55,7 +54,7 @@ class Books extends BaseController
         $this->bookModel->save($newData);
 
         $session = session();
-        $session->setFlashdata('success', 'Successful Registration');
+        $session->setFlashdata('success', 'Registrado com sucesso');
         return redirect()->to(base_url().'/books');
 
       }
@@ -65,6 +64,80 @@ class Books extends BaseController
     echo view('templates/header', $data);
     echo view('books');
     echo view('templates/footer');
+  }
+
+  public function findOnly()
+  {
+    $id = $this->request->getVar('id');
+
+    $book = $this->bookModel->find($id);
+    $data = [
+      'book' => $book
+    ];
+    return $this->response->setJSON($data);
+  }
+
+  /**
+   * @throws \ReflectionException
+   */
+  public function edit()
+  {
+    $data = [];
+    helper(['form']);
+
+
+    if ($this->request->getMethod() == 'post') {
+      //let's do the validation here
+      $rules = [
+        'title' => 'required|min_length[3]|max_length[100]',
+        'description' => 'required',
+        'author' => 'required|min_length[3]|max_length[100]',
+        'number_pages' => 'required|min_length[1]|max_length[10]',
+      ];
+
+      if (! $this->validate($rules)) {
+        $data['validation'] = $this->validator;
+      }else{
+
+        $upData = [
+          'id' => $this->request->getPost('id'),
+          'title' => $this->request->getPost('title'),
+          'description' => $this->request->getPost('description'),
+          'author' => $this->request->getPost('author'),
+          'number_pages' => $this->request->getPost('number_pages'),
+        ];
+
+        try {
+          $this->bookModel->save($upData);
+
+          $session = session();
+          $session->setFlashdata('success', 'Atualizado com Sucesso');
+          return redirect()->to(base_url().'/books');
+
+        } catch (\ReflectionException $e) {
+
+        }
+      }
+
+      echo view('templates/header');
+      echo view('books');
+      echo view('templates/footer');
+
+    }
+
+  }
+
+  public function destroy()
+  {
+    $id = $this->request->getVar('id');
+    $this->bookModel->delete($id);
+
+    $data = [
+      'status' => 'Puf! Seu registro foi excluído!',
+      'icon' => 'success'
+    ];
+
+    return $this->response->setJSON($data);
   }
 
 }

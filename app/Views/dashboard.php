@@ -14,7 +14,7 @@
                             <i class="fa fa-book fa-5x"></i>
                         </div>
                         <div class="col-9 text-right">
-                            <h1>10</h1>
+                            <h1><?php echo $countBooks; ?></h1>
                             <h4>Livros</h4>
                         </div>
                     </div>

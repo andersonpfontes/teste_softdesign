@@ -35,6 +35,12 @@ $routes->get('logout', 'Users::logout');
 $routes->match(['get','post'],'register', 'Users::register', ['filter' => 'noauth']);
 $routes->match(['get','post'],'profile', 'Users::profile',['filter' => 'auth']);
 $routes->get('dashboard', 'Dashboard::index',['filter' => 'auth']);
+$routes->match(['get','post'],'books', 'Books::index',['filter' => 'auth']);
+
+$routes->post('books/destroy', 'Books::destroy',['filter' => 'auth']);
+$routes->post('books/findOnly', 'Books::findOnly',['filter' => 'auth']);
+$routes->post('books/edit', 'Books::edit',['filter' => 'auth']);
+
 
 /**
  * --------------------------------------------------------------------

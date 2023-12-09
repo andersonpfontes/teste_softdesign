@@ -35,7 +35,7 @@ class Users extends BaseController
 
 				$this->setUserSession($user);
         $session = session();
-				$session->setFlashdata('success', 'Successful Login');
+				$session->setFlashdata('success', 'Login efetuado com sucesso');
 				return redirect()->to('dashboard');
 
 			}
@@ -86,7 +86,7 @@ class Users extends BaseController
 				];
 				$model->save($newData);
 				$session = session();
-				$session->setFlashdata('success', 'Successful Registration');
+				$session->setFlashdata('success', 'Registrado com sucesso');
 				return redirect()->to('/');
 
 			}
@@ -131,7 +131,7 @@ class Users extends BaseController
 					}
 				$model->save($newData);
 
-				session()->setFlashdata('success', 'Successfuly Updated');
+				session()->setFlashdata('success', 'Atualizado com Sucesso');
 				return redirect()->to('/profile');
 
 			}

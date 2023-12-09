@@ -2,9 +2,10 @@
   <div class="row">
     <div class="col-md-12 mt-5 pt-3 pb-3 bg-white from-wrapper">
       <div class="container">
-        <h3>Cadastro de Livros</h3>
+        <h3>Gestão de Livros</h3>
         <hr>
-        <form class="" action="<?php echo base_url(); ?>/books" method="post">
+        <form class="form" action="<?php echo base_url('/books'); ?>" method="post">
+            <input type="hidden" class="form-control" name="id" id="id" value="">
           <div class="row">
             <div class="col-12 col-sm-12">
               <div class="form-group">
@@ -41,7 +42,7 @@
 
           <div class="row">
             <div class="col-12 col-sm-4">
-              <button type="submit" class="btn btn-primary">Registrar</button>
+              <button id="btnResource" type="submit" class="btn btn-primary">Registrar</button>
             </div>
           </div>
         </form>
@@ -86,11 +87,11 @@
                                     <div class="dropdown">
                                         <button class="btn btn-sm btn-icon" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="bx bx-dots-horizontal-rounded" data-toggle="tooltip" data-placement="top"
-                                               title="Actions"></i>
+                                               title="Ação"></i>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                            <a class="dropdown-item" href="#"><i class="bx bxs-pencil mr-2"></i> Editar Livro</a>
-                                            <a class="dropdown-item text-danger" href="#"><i class="bx bxs-trash mr-2"></i> Deletar</a>
+                                            <a class="dropdown-item confirm_edit" data-id="<?php echo $book['id']; ?>" href="#"><i class="bx bxs-pencil mr-2"></i> Editar Livro</a>
+                                            <a class="dropdown-item text-danger confirm_delete" data-id="<?php echo $book['id']; ?>" href="#"><i class="bx bxs-trash mr-2"></i> Deletar</a>
                                         </div>
                                     </div>
                                 </td>
